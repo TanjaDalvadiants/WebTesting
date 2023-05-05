@@ -40,100 +40,100 @@ public class WebTest {
     void shouldTestHappyPathSelenium() {
 
         driver.get("http://localhost:9999/");
-        driver.findElements(By.tagName("input")).get(0).sendKeys("Татьяна");
-        driver.findElements(By.tagName("input")).get(1).sendKeys("+79042424072");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.tagName("button")).click();
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Татьяна");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79042424072");
+        driver.findElement(By.cssSelector("[data-test-id='agreement'] span")).click();
+        driver.findElement(By.className("button__text")).click();
 
         String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-        String actual = driver.findElement(By.className("Success_successBlock__2L3Cw")).getText().trim();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
         assertEquals(expected, actual);
     }
     @Test
     void shouldTestLatinNameSelenium() {
 
         driver.get("http://localhost:9999/");
-        driver.findElements(By.tagName("input")).get(0).sendKeys("Tatyana");
-        driver.findElements(By.tagName("input")).get(1).sendKeys("+79042424072");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.tagName("button")).click();
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Tatiana");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79042424072");
+        driver.findElement(By.cssSelector("[data-test-id='agreement'] span")).click();
+        driver.findElement(By.className("button__text")).click();
 
         String expected = "Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.";
-        String actual = driver.findElement(By.className("input__sub")).getText().trim();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='name'].input_invalid .input__sub")).getText().trim();
         assertEquals(expected, actual);
     }
     @Test
     void shouldTestNameWithNumbersSelenium() {
 
         driver.get("http://localhost:9999/");
-        driver.findElements(By.tagName("input")).get(0).sendKeys("Татьяна1");
-        driver.findElements(By.tagName("input")).get(1).sendKeys("+79042424072");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.tagName("button")).click();
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Татьяна123");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79042424072");
+        driver.findElement(By.cssSelector("[data-test-id='agreement'] span")).click();
+        driver.findElement(By.className("button__text")).click();
 
         String expected = "Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.";
-        String actual = driver.findElement(By.className("input__sub")).getText().trim();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='name'].input_invalid .input__sub")).getText().trim();
         assertEquals(expected, actual);
     }
     @Test
     void shouldTestEmptyNameSelenium() {
 
         driver.get("http://localhost:9999/");
-        driver.findElements(By.tagName("input")).get(0).sendKeys(" ");
-        driver.findElements(By.tagName("input")).get(1).sendKeys("+79042424072");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.tagName("button")).click();
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79042424072");
+        driver.findElement(By.cssSelector("[data-test-id='agreement'] span")).click();
+        driver.findElement(By.className("button__text")).click();
 
         String expected = "Поле обязательно для заполнения";
-        String actual = driver.findElement(By.className("input__sub")).getText().trim();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='name'].input_invalid .input__sub")).getText().trim();
         assertEquals(expected, actual);
     }
     @Test
     void shouldTestLongPhoneSelenium() {
 
         driver.get("http://localhost:9999/");
-        driver.findElements(By.tagName("input")).get(0).sendKeys("Татьяна");
-        driver.findElements(By.tagName("input")).get(1).sendKeys("834329423874982749287");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.tagName("button")).click();
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Татьяна");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("89289239319202");
+        driver.findElement(By.cssSelector("[data-test-id='agreement'] span")).click();
+        driver.findElement(By.className("button__text")).click();
 
         String expected = "Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.";
-        String actual = driver.findElement(By.xpath("/html/body/div/div/form/div[2]/span/span/span[3]")).getText().trim();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub")).getText().trim();
         assertEquals(expected, actual);
     }
     @Test
     void shouldTestShortPhoneSelenium() {
 
         driver.get("http://localhost:9999/");
-        driver.findElements(By.tagName("input")).get(0).sendKeys("Татьяна");
-        driver.findElements(By.tagName("input")).get(1).sendKeys("8343");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.tagName("button")).click();
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Татьяна");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("892");
+        driver.findElement(By.cssSelector("[data-test-id='agreement'] span")).click();
+        driver.findElement(By.className("button__text")).click();
 
         String expected = "Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.";
-        String actual = driver.findElement(By.xpath("/html/body/div/div/form/div[2]/span/span/span[3]")).getText().trim();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub")).getText().trim();
         assertEquals(expected, actual);
     }
     @Test
     void shouldTestEmptyPhoneSelenium() {
 
         driver.get("http://localhost:9999/");
-        driver.findElements(By.tagName("input")).get(0).sendKeys("Татьяна");
-        driver.findElements(By.tagName("input")).get(1).sendKeys(" ");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.tagName("button")).click();
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Татьяна");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys(" ");
+        driver.findElement(By.cssSelector("[data-test-id='agreement'] span")).click();
+        driver.findElement(By.className("button__text")).click();
 
         String expected = "Поле обязательно для заполнения";
-        String actual = driver.findElement(By.xpath("/html/body/div/div/form/div[2]/span/span/span[3]")).getText().trim();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub")).getText().trim();
         assertEquals(expected, actual);
     }
     @Test
     void shouldTestAgreementNotCheckSelenium() {
 
         driver.get("http://localhost:9999/");
-        driver.findElements(By.tagName("input")).get(0).sendKeys("Татьяна");
-        driver.findElements(By.tagName("input")).get(1).sendKeys("+79042424072");
-        driver.findElement(By.tagName("button")).click();
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Татьяна");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79052345678");
+        driver.findElement(By.className("button__text")).click();
 
         String expected = "Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй";
         String actual = driver.findElement(By.cssSelector("[data-test-id='agreement']")).getText().trim();
